@@ -1,0 +1,30 @@
+body {
+    background-color: #F9E8D1;
+}
+
+.whole-container {
+    background-color: aliceblue;
+    height: auto;
+}
+/*Top*/
+.top {
+    background-color:aliceblue;
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 5%;
+}
+
+p {
+    border: 1px solid rgba(78, 78, 78, 0.5);
+    border-radius: 10%;
+
+}
+
+/*Bottom*/
+.bottom {
+    background-color:aliceblue;
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 150%;
+}
+
