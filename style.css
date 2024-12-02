@@ -1,14 +1,23 @@
+html {
+    height: 100vh;
+}
+
 body {
     background-color: #F9E8D1;
     font-family: "Poppins", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
     padding: 0%;
     margin: 0%;
 }
 
 .whole-container {
-    height: auto;
-    width: auto;
-    transform: scale(0.7, 1);
+    height: 100%;
+    width: 90%;
+    border: 5px solid black;
 }
 
 /*Top*/
@@ -20,6 +29,7 @@ body {
     gap: 10%;
     padding-right: 20%;
     padding-left: 5%;
+    height: auto;
 }
 
 p {
@@ -39,13 +49,16 @@ p {
     align-items: flex-start;
     padding-left: 5%;
     font-weight: 800;
-    font-style: normal;
+    font-style: italic;
     border-bottom-right-radius: 150px;
+    height: max-content;
 }
 
 .button-years, .button-months, .button-days {
     font-size: 300%;
 }
+
+
 
 /*arrow-container*/
 
