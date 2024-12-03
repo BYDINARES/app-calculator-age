@@ -6,30 +6,39 @@ body {
     background-color: #F9E8D1;
     font-family: "Poppins", sans-serif;
     display: flex;
-    align-items: center;
     justify-content: center;
     height: 100%;
     width: 100%;
-    padding: 0%;
-    margin: 0%;
+    margin-top: 15%;
 }
 
 .whole-container {
-    height: 100%;
+    height: 65%;
     width: 90%;
+    display: flex;
     border: 5px solid black;
+    flex-direction: column;
+    position: relative;
 }
 
 /*Top*/
 .top {
     background-color:aliceblue;
+    /*flex*/
     display: flex;
-    justify-content: flex-start;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: center;
+    /*padding and gap*/
     padding-top: 5%;
     gap: 10%;
-    padding-right: 20%;
     padding-left: 5%;
-    height: auto;
+    padding-right: 5%;
+}
+
+.top-buttons {
+    display: flex;
+    flex-direction: row;
 }
 
 p {
@@ -47,11 +56,11 @@ p {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    flex-grow: 1;
+    border-bottom-right-radius: 150px;
     padding-left: 5%;
     font-weight: 800;
     font-style: italic;
-    border-bottom-right-radius: 150px;
-    height: max-content;
 }
 
 .button-years, .button-months, .button-days {
@@ -64,4 +73,10 @@ p {
 
 .arrow-container {
     background-color:aliceblue;
+    display: flex;
+    justify-content: center;
+}
+
+.arrow {
+    background-color: purple;
 }
