@@ -58,6 +58,11 @@ button.top-buttons {
     width: fit-content;
 }
 
+input {
+    height: 200%;
+    width: 90%;
+}
+
 /*Bottom*/
 .bottom {
     background-color:aliceblue;
