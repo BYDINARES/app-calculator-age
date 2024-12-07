@@ -13,11 +13,10 @@ body {
 }
 
 .whole-container {
-    height: 65%;
+    height: 75%;
     width: 90%;
     display: flex;
     flex-direction: column;
-    position: relative;
 }
 
 /*Top*/
@@ -27,24 +26,27 @@ body {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    justify-content: center;
+    justify-content: flex-start;
     /*padding and gap*/
-    padding-top: 5%;
+    padding-top: 3%;
     gap: 10%;
     padding-left: 5%;
     padding-right: 5%;
+    height: auto;
 }
 
 .top-buttons {
     display: flex;
     flex-direction: row;
+    padding-top: 0%;
+    flex-basis: auto;
 }
 
 .day, .month, .year {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    height: fit-content;
 }
 
 p{
@@ -53,14 +55,13 @@ p{
     font-style: normal;
     opacity: 0.6;
 }
-
-button.top-buttons {
-    width: fit-content;
+/*Top inputs*/
+form {
+    display: flex;
 }
 
 input {
-    height: 200%;
-    width: 90%;
+    flex-grow: 2;
 }
 
 /*Bottom*/
@@ -68,24 +69,21 @@ input {
     background-color:aliceblue;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     flex-grow: 1;
     border-bottom-right-radius: 150px;
     padding-left: 5%;
     font-weight: 800;
     font-style: italic;
+    padding-bottom: 0%;
 }
 
 .button-years, .button-months, .button-days {
-    font-size: 300%;
+    font-size: 500%;
 }
-
-
 
 /*arrow-container*/
 
 .arrow-container {
-    background-color:aliceblue;
     display: flex;
     justify-content: center;
 }
