@@ -13,7 +13,7 @@ body {
 }
 
 .whole-container {
-    height: 85%;
+    height: 75%;
     width: 90%;
     display: flex;
     flex-direction: column;
@@ -25,16 +25,17 @@ body {
     /*flex*/
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
     justify-content: flex-start;
     /*padding and gap*/
     padding-top: 3%;
-    gap: 10%;
     padding-left: 5%;
     padding-right: 5%;
-    height: 38%;
+    height: 40%;
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
 }
 
+/*Top inputs*/
 .top-buttons {
     display: flex;
     flex-direction: row;
@@ -45,11 +46,25 @@ body {
 }
 
 .top-buttons input {
-    border: none;
+    border: 1px solid rgba(0, 0, 0, 0.5);
     /*padding: 2rem 1.5rem;*/
     font-size: 2rem;
     width: 100%;
-    height: 80px;
+    height: auto;
+    font-size: 3rem;
+    border-radius: 0.7rem;
+}
+
+   /* Remove spinner controls in Chrome, Edge, and Safari */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+   /* Remove spinner controls in Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
 }
 
 .day, .month, .year {
@@ -65,13 +80,9 @@ p{
     font-style: normal;
     opacity: 0.6;
 }
-/*Top inputs*/
+
 form {
     display: flex;
-}
-
-input {
-    flex-grow: 2;
 }
 
 /*Bottom*/
@@ -79,13 +90,13 @@ input {
     background-color:aliceblue;
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
     border-bottom-right-radius: 150px;
+    border-bottom-left-radius: 2rem;
     padding-left: 5%;
+    /*font*/
     font-weight: 800;
     font-style: italic;
-    padding-bottom: 0%;
-    height: 62%;
+    height: 60%;
 }
 
 .button-years, .button-months, .button-days {
@@ -115,7 +126,7 @@ input {
     position: relative;
     align-items: center;
     z-index: 0;
-    top: 30%;
+    top: 15%;
 }
 
 #arrow-button {
