@@ -46,25 +46,39 @@ body {
 }
 
 .top-buttons input {
-    border: 1px solid rgba(0, 0, 0, 0.5);
     /*padding: 2rem 1.5rem;*/
     font-size: 2rem;
     width: 100%;
     height: auto;
     font-size: 3rem;
     border-radius: 0.7rem;
+    transition: background-color 0.4s ease;
 }
+
+   /*hover and focus of the inputs*/
+.top-buttons input:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    outline: none;
+}
+.top-buttons input:focus {
+    background-color: rgba(0, 0, 0, 0.1);
+    outline: none;
+}
+
 
    /* Remove spinner controls in Chrome, Edge, and Safari */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
+    border: 1.5px solid rgba(0, 0, 0, 0.5);
 }
 
    /* Remove spinner controls in Firefox */
 input[type="number"] {
+    appearance: none;
     -moz-appearance: textfield;
+    border: 1.5px solid rgba(0, 0, 0, 0.5);
 }
 
 .day, .month, .year {
