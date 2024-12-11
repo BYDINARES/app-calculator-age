@@ -52,17 +52,22 @@ body {
     height: auto;
     font-size: 3rem;
     border-radius: 0.7rem;
-    transition: background-color 0.4s ease;
+    transition: background-color 0.4s ease, transform 0.2s ease;
+    cursor: pointer;
+    box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.1);
+    border: 2px solid #cccccc;
 }
 
    /*hover and focus of the inputs*/
 .top-buttons input:hover {
     background-color: rgba(0, 0, 0, 0.2);
     outline: none;
+    transform: scale(1.1,1.1);
 }
 .top-buttons input:focus {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.2);
     outline: none;
+    transform: scale(1.1,1.1);
 }
 
 
@@ -71,14 +76,12 @@ input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
-    border: 1.5px solid rgba(0, 0, 0, 0.5);
 }
 
    /* Remove spinner controls in Firefox */
 input[type="number"] {
     appearance: none;
     -moz-appearance: textfield;
-    border: 1.5px solid rgba(0, 0, 0, 0.5);
 }
 
 .day, .month, .year {
@@ -124,28 +127,32 @@ form {
     justify-content: center;
 }
 
-.arrow-background {
-    background-color: blueviolet;
-    border-radius: 50%;
-    padding: 2%;
-    cursor: pointer;
-    z-index: 1;
-    justify-content: center;
-}
+
 
 .line {
     background-color: grey;
-    height: 1px;
+    height: 2px;
     width: 100%;
     position: relative;
     align-items: center;
     z-index: 0;
-    top: 15%;
+    top: 16%;
 }
 
 #arrow-button {
+    background-color: black;
     border-radius: 50%;
+    padding: 1.3rem;
     cursor: pointer;
-    background-color: transparent;
-    border: none;
+    border: none;  
+    position: relative;      
+    z-index: 1;
+    transition: background-color 0.4s ease, transform 0.2s ease;
+}
+
+   /**/
+   #arrow-button:hover, #arrow-button:focus{
+    background-color: blueviolet;
+    outline: none;
+    transform: scale(1.1,1.1);
 }
