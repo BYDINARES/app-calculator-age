@@ -28,8 +28,8 @@ body {
     justify-content: flex-start;
     /*padding and gap*/
     padding-top: 3%;
-    padding-left: 5%;
-    padding-right: 5%;
+    padding-left: 7%;
+    padding-right: 7%;
     height: 40%;
     border-top-left-radius: 2rem;
     border-top-right-radius: 2rem;
@@ -47,7 +47,6 @@ body {
 
 .top-buttons input {
     /*padding: 2rem 1.5rem;*/
-    font-size: 2rem;
     width: 100%;
     height: auto;
     font-size: 3rem;
@@ -59,17 +58,11 @@ body {
 }
 
    /*hover and focus of the inputs*/
-.top-buttons input:hover {
+.top-buttons input:hover, .top-buttons input:focus{
     background-color: rgba(0, 0, 0, 0.2);
     outline: none;
     transform: scale(1.1,1.1);
 }
-.top-buttons input:focus {
-    background-color: rgba(0, 0, 0, 0.2);
-    outline: none;
-    transform: scale(1.1,1.1);
-}
-
 
    /* Remove spinner controls in Chrome, Edge, and Safari */
 input[type="number"]::-webkit-inner-spin-button,
@@ -91,7 +84,7 @@ input[type="number"] {
     height: fit-content;
 }
 
-p{
+.top p{
     width: fit-content;
     font-weight: 500;
     font-style: normal;
@@ -109,7 +102,7 @@ form {
     flex-direction: column;
     border-bottom-right-radius: 150px;
     border-bottom-left-radius: 2rem;
-    padding-left: 5%;
+    padding-left: 7%;
     /*font*/
     font-weight: 800;
     font-style: italic;
@@ -117,7 +110,7 @@ form {
 }
 
 .button-years, .button-months, .button-days {
-    font-size: 500%;
+    font-size: 5rem;
 }
 
 /*arrow-container*/
@@ -150,9 +143,34 @@ form {
     transition: background-color 0.4s ease, transform 0.2s ease;
 }
 
-   /**/
+   /*Hover and Focus*/
    #arrow-button:hover, #arrow-button:focus{
     background-color: blueviolet;
     outline: none;
     transform: scale(1.1,1.1);
+}
+
+/*Responsive screens*/
+@media screen and (min-width: 992px){
+    /*Top*/
+    .top-buttons {
+        gap: 8%;
+        padding-right: 20%;
+    }
+
+    .top-buttons input {
+        font-size: 4rem;
+    }
+    
+    .arrow-container {
+       justify-content: flex-end;     
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .bottom {
+        align-items: center;
+        padding-left: 0%;
+        text-align: left;
+    }
 }
