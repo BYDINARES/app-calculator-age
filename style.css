@@ -98,9 +98,7 @@ form {
 /*Bottom*/
 .bottom {
     background-color:aliceblue;
-    display: flex;
-    flex-direction: column;
-    border-bottom-right-radius: 150px;
+    border-bottom-right-radius: 10rem;
     border-bottom-left-radius: 2rem;
     padding-left: 7%;
     /*font*/
@@ -109,7 +107,12 @@ form {
     height: 60%;
 }
 
-.button-years, .button-months, .button-days {
+.bottom ul{
+    list-style-type: none;
+    padding: 0%;
+}
+
+.bottom li {
     font-size: 5rem;
 }
 
@@ -161,6 +164,15 @@ form {
     .top-buttons input {
         font-size: 4rem;
     }
+
+    .bottom ul {
+        padding-top: 0px;
+        margin-top: 0%
+    }
+    .bottom li {
+        font-size: 6rem;
+        line-height: 7rem;
+    }
     
     .arrow-container {
        justify-content: flex-end;     
@@ -169,8 +181,8 @@ form {
 
 @media screen and (min-width: 1200px) {
     .bottom {
-        align-items: center;
         padding-left: 0%;
-        text-align: left;
+        display: flex;
+        justify-content: center;
     }
 }
