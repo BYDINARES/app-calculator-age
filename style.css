@@ -95,6 +95,14 @@ form {
     display: flex;
 }
 
+/*Erros*/
+
+.errors {
+    color: red;
+    font-size: 0.7rem;
+    visibility: hidden;
+}
+
 /*Bottom*/
 .bottom {
     background-color:aliceblue;

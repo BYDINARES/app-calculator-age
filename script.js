@@ -1,13 +1,21 @@
-//Input dates//
-let dayImput = document.getElementsByTagName('day-input');
-let monthImput = document.querySelector('.month-input');
-let yearImput = document.querySelector('.year-input');
+function dateToYearsMonthsDays() {
+    //Input dates//
+    let dayImput = document.querySelector('.day-input');
+    let monthImput = document.querySelector('.month-input');
+    let yearImput = document.querySelector('.year-input');
 
-const arrowButton = document.getElementById('arrow-button');
+    const arrowButton = document.getElementById('arrow-button');
 
-//Real dates//
-let todaysDay = new Date.prototype.getDate();
-let todaysMonth = new Date.prototype.getMonth();
-let todaysYear = new Date.prototype.getFullYear();
+    //Real dates//
+    const newDate = new Date();
+    let todaysDay = newDate.getDate();
+    let todaysMonth = newDate.getMonth();
+    let todaysYear = newDate.getFullYear();
 
-const actualDay = todaysDay - dayImput;
+    //Erros//
+    const errorAlerts = document.querySelector('.errors');
+
+    if (yearImput > todaysYear) {
+        return errorAlerts.style.visibility = 'hidden'; 
+    }
+}
