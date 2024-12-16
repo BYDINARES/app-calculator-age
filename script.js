@@ -1,21 +1,34 @@
+const arrowButton = document.getElementById('arrow-button').addEventListener('click', dateToYearsMonthsDays);
+
 function dateToYearsMonthsDays() {
     //Input dates//
-    let dayImput = document.querySelector('.day-input');
-    let monthImput = document.querySelector('.month-input');
-    let yearImput = document.querySelector('.year-input');
+    const dayImput = document.querySelector('.day-input');
+    const inputDay = parseInt(dayImput.value, 10);
 
-    const arrowButton = document.getElementById('arrow-button');
+    const monthImput = document.querySelector('.month-input');
+    const inputMonth = parseInt(monthImput.value, 10);
+
+    const yearImput = document.querySelector('.year-input');
+    const inputYear = parseInt(yearImput.value, 10);
+
 
     //Real dates//
     const newDate = new Date();
-    let todaysDay = newDate.getDate();
-    let todaysMonth = newDate.getMonth();
-    let todaysYear = newDate.getFullYear();
+    const todaysDay = newDate.getDate();
+    const todaysMonth = newDate.getMonth() + 1;
+    const todaysYear = newDate.getFullYear();
 
     //Erros//
     const errorAlerts = document.querySelector('.errors');
 
-    if (yearImput > todaysYear) {
-        return errorAlerts.style.visibility = 'hidden'; 
+    
+    if (inputYear > todaysYear) {
+        errorAlerts.style.visibility = 'visible';
+        console.log('An error');
+        return;
+    } else {
+        return errorAlerts.style.visibility = 'hidden';
     }
 }
+
+console.log()
