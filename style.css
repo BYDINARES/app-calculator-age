@@ -124,6 +124,10 @@ form {
     font-size: 5rem;
 }
 
+span {
+    color: purple;
+}
+
 /*arrow-container*/
 
 .arrow-container {

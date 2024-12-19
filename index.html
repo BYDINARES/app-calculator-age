@@ -29,21 +29,21 @@
         <div class="day">
           <p>DAY</p>
           <form action="" method="post" class="day-input">
-            <input type="number" placeholder="DD" id="day">
+            <input type="text" placeholder="DD" id="day">
           </form>
           <p class="errors day-error"></p>
         </div>
         <div class="month">
           <p>MONTH</p>
           <form action="" method="post" class="month-input">
-            <input type="number" placeholder="MM" id="month">
+            <input type="text" placeholder="MM" id="month">
           </form>
           <p class="errors month-error"></p>
         </div>
         <div class="year">
           <p>YEAR</p>
           <form action="" method="post" class="year-input">
-            <input type="number" placeholder="YYYY" id="">
+            <input type="text" placeholder="YYYY" id="">
           </form>
           <p class="errors year-error"></p>
         </div>
@@ -53,7 +53,7 @@
 
       <div class="arrow-container">
         <div class="arrow-background">
-          <button id="arrow-button" onclick="dateToYearsMonthsDays()">
+          <button id="arrow-button">
             <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="46" height="44" viewBox="0 0 46 44"><g fill="none" stroke="#FFF" stroke-width="2"><path d="M1 22.019C8.333 21.686 23 25.616 23 44M23 44V0M45 22.019C37.667 21.686 23 25.616 23 44"/></g>
             </svg>
           </button>
@@ -63,9 +63,9 @@
 
     <div class="bottom">
       <ul>  
-        <li class="button-years">- - years</li>
-        <li class="button-months">- - months</li>
-        <li class="button-days">- - days</li>
+        <li class="button-years"><span>- -</span>years</li>
+        <li class="button-months"><span>- -</span>months</li>
+        <li class="button-days"><span>- -</span>days</li>
       </ul>
     </div>
   </div>
