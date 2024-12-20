@@ -100,8 +100,8 @@ form {
 .errors {
     color: red;
     font-size: 0.7rem;
-    visibility: hidden;
-}
+    margin-top: 0%;
+}   
 
 /*Bottom*/
 .bottom {

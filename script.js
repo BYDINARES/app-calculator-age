@@ -4,13 +4,23 @@ const monthInputElement = document.querySelector('#month');
 const yearInputElement = document.querySelector('#year');
 
 //outputs
-const yearOutputElement = document.querySelector('.button-years');
-const monthOutputElement = document.querySelector('.button-months');
-const dayOputElement = document.querySelector('.button-days');
+const outputYear = document.querySelector('.button-years');
+const outputMonth = document.querySelector('.button-months');
+const ouputDay = document.querySelector('.button-days');
+
+//Erros
+const errorDay = document.querySelector('.day-error');
+const errorMonth = document.querySelector('.month-error');
+const errorYear = document.querySelector('.year-error');
 
 //arrow button
 const arrowButton = document.getElementById('arrow-button');
-arrowButton.addEventListener('input', )
+
+dayInputElement.addEventListener('input', (e) => {
+    if(+dayInputElement.value > 31){
+        errorDay.textContent = 'Must be a valid date';
+    }
+});
 
 
 /*function dateToYearsMonthsDays() {
