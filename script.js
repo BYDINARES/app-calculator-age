@@ -1,4 +1,5 @@
 //inputs
+let isValid = false;
 const dayInputElement = document.querySelector('#day');
 const monthInputElement = document.querySelector('#month');
 const yearInputElement = document.querySelector('#year');
@@ -16,55 +17,45 @@ const errorYear = document.querySelector('.year-error');
 //arrow button
 const arrowButton = document.getElementById('arrow-button');
 
-dayInputElement.addEventListener('input', (e) => {
+//dates
+const currentDate = new Date;
+const currentYear = currentDate.getFullYear();
+
+dayInputElement.addEventListener('input', (e) => {    
     if(+dayInputElement.value > 31){
         errorDay.textContent = 'Must be a valid date';
+        isValid = false;
+    } else if (+dayInputElement.value === 0){
+        errorDay.textContent = 'Please enter a number';
+        isValid = false; 
+    } else {
+        errorDay.textContent = '';
+        isValid = true;
     }
 });
 
-
-/*function dateToYearsMonthsDays() {
-// Select the input elements
-    const dayInputElement = document.querySelector('#day');
-    const monthInputElement = document.querySelector('#month');
-    const yearInputElement = document.querySelector('#year');
-
-    //Get the values as numbers
-    const inputDay = dayInputElement?.valueAsNumber || 0; // Defaults to 0 if invalid
-    const inputMonth = monthInputElement?.valueAsNumber || 0;
-    const inputYear = yearInputElement?.valueAsNumber || 0;
-
-    //Real dates//
-    const newDate = new Date();
-    const todaysDay = newDate.getDate();
-    const todaysMonth = newDate.getMonth() + 1;
-    const todaysYear = newDate.getFullYear();
-
-    //Erros//
-    const dayError = document.querySelector('.day-error');
-    
-    const monthError = document.querySelector('.month-error');
-    const yearError = document.querySelector('.year-error');
-    
-    
-    //Validating
-    if (inputYear > todaysYear || inputYear < 1) {
-        yearError.textContent = 'Invalid year. Please enter a past or the actual year';  
-        yearError.style.visibility = 'visible';
-
-    } else if (inputMonth < 1 || inputMonth > 12) {
-        monthError.textContent = 'Invalid month. Please enter a month between 1-12';
-        monthError.style.visibility = 'visible';
-        return;
-    } else if (inputDay < 1 || inputDay > 31){
-        dayError.textContent = 'Invalid day. Please enter a day between 1-31';
-        dayError.style.visibility = 'visible';
-        return;    
+monthInputElement.addEventListener('input', (e) => {
+    if(+monthInputElement.value > 12){
+        errorMonth.textContent = 'Must be a valid date';
+        isValid = false;
+    } else if (+monthInputElement.value === 0){
+        errorMonth.textContent = 'Please enter a number';
+        isValid = false;
     } else {
-        dayError.style.visibility = 'hidden';
-        monthError.style.visibility = 'hidden';
-        yearError.style.visibility = 'hidden';
+        errorMonth.textContent = '';
+        isValid = true;
     }
+});
 
-    console.log('hello');
-}*/
+yearInputElement.addEventListener('input', (e) => {
+    if(+yearInputElement.value > 2024){
+        errorYear.textContent = 'Must be a valid date';
+        isValid = false;
+    } else if (+yearInputElement.value === 0){
+        errorYear.textContent = 'Please enter a number';
+        isValid = false; 
+    } else {
+        errorYear.textContent = '';
+        isValid = true;
+    }
+});
