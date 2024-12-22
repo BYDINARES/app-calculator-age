@@ -20,26 +20,50 @@ const arrowButton = document.getElementById('arrow-button');
 //dates
 const currentDate = new Date;
 const currentYear = currentDate.getFullYear();
+const currentMonth = currentDate.getMonth() + 1;
+const currentDay = currentDate.getDate();
 
-dayInputElement.addEventListener('input', (e) => {    
+function calculateValidDate (){
+    const day = +dayInputElement.value;
+    const month = +monthInputElement.value;
+    const year = +yearInputElement.value;
+    const inputDate = new Date(year, month, day);
+
+    if(currentDate < inputDate){
+        isValid = false;
+        return 'Date cannot be in the future';
+    } else {
+        isValid = true;
+        return '';
+    }
+    
+} 
+
+dayInputElement.addEventListener('input', () => {    
     if(+dayInputElement.value > 31){
         errorDay.textContent = 'Must be a valid date';
         isValid = false;
     } else if (+dayInputElement.value === 0){
         errorDay.textContent = 'Please enter a number';
         isValid = false; 
+    } else if (calculateValidDate() === false){
+        errorDay.textContent = 'Date cannot be in the future';
+        isValid = false;
     } else {
         errorDay.textContent = '';
         isValid = true;
     }
 });
 
-monthInputElement.addEventListener('input', (e) => {
+monthInputElement.addEventListener('input', () => {
     if(+monthInputElement.value > 12){
         errorMonth.textContent = 'Must be a valid date';
         isValid = false;
     } else if (+monthInputElement.value === 0){
         errorMonth.textContent = 'Please enter a number';
+        isValid = false;
+    } else if (calculateValidDate() === false){
+        errorMonth.textContent = 'Date cannot be in the future';
         isValid = false;
     } else {
         errorMonth.textContent = '';
@@ -47,15 +71,27 @@ monthInputElement.addEventListener('input', (e) => {
     }
 });
 
-yearInputElement.addEventListener('input', (e) => {
-    if(+yearInputElement.value > 2024){
+yearInputElement.addEventListener('input', () => {
+    if(+yearInputElement.value > currentYear){
         errorYear.textContent = 'Must be a valid date';
         isValid = false;
     } else if (+yearInputElement.value === 0){
         errorYear.textContent = 'Please enter a number';
         isValid = false; 
+    } else if (calculateValidDate() === false){
+        errorYear.textContent = 'Date cannot be in the future';
+        isValid = false;
     } else {
         errorYear.textContent = '';
         isValid = true;
+    }
+    if (calculateValidDate()){
+        errorDay.textContent = calculateValidDate(); 
+        errorMonth.textContent = calculateValidDate();
+        errorYear.textContent = calculateValidDate();
+    } else {
+        errorDay.textContent = '';
+        errorMonth.textContent = '';
+        errorYear.textContent = '';
     }
 });
