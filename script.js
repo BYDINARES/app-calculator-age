@@ -31,13 +31,15 @@ function calculateValidDate (){
 
     if(currentDate < inputDate){
         isValid = false;
-        return 'Date cannot be in the future';
+        return false;
+    } else if (inputDate === 0){
+        isValid = true
+        return true;
     } else {
         isValid = true;
-        return '';
+        return true;
     }
-    
-} 
+}
 
 dayInputElement.addEventListener('input', () => {    
     if(+dayInputElement.value > 31){
@@ -52,6 +54,9 @@ dayInputElement.addEventListener('input', () => {
     } else {
         errorDay.textContent = '';
         isValid = true;
+        if(calculateValidDate() === false){
+            errorDay.textContent = "Date can't be in the future";
+        }
     }
 });
 
@@ -68,6 +73,9 @@ monthInputElement.addEventListener('input', () => {
     } else {
         errorMonth.textContent = '';
         isValid = true;
+        if(calculateValidDate() === false){
+            errorMonth.textContent = "Date can't be in the future";
+        }
     }
 });
 
@@ -78,20 +86,15 @@ yearInputElement.addEventListener('input', () => {
     } else if (+yearInputElement.value === 0){
         errorYear.textContent = 'Please enter a number';
         isValid = false; 
-    } else if (calculateValidDate() === false){
-        errorYear.textContent = 'Date cannot be in the future';
-        isValid = false;
     } else {
         errorYear.textContent = '';
         isValid = true;
-    }
-    if (calculateValidDate()){
-        errorDay.textContent = calculateValidDate(); 
-        errorMonth.textContent = calculateValidDate();
-        errorYear.textContent = calculateValidDate();
-    } else {
-        errorDay.textContent = '';
-        errorMonth.textContent = '';
-        errorYear.textContent = '';
+        if(calculateValidDate() === false){
+            errorYear.textContent = "Date can't be in the future";
+            errorMonth.textContent = "Date can't be in the future";
+            errorDay.textContent = "Date can't be in the future";
+        } else {
+            [errorDay, errorMonth, errorYear] = '';
+        }
     }
 });
