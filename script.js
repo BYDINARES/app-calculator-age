@@ -29,14 +29,35 @@ function calculateValidDate (){
     const year = +yearInputElement.value;
     const inputDate = new Date(year, month, day);
 
+    //borders
+    let inputBorders = document.querySelectorAll('.top input');
+
     if(currentDate < inputDate){
         isValid = false;
+        for(let i = 0; i < inputBorders.length; i++){
+            inputBorders[i].style.borderColor = 'red';
+        }
+        errorDay.textContent = "date can't be in the future"; 
+        errorMonth.textContent = "date can't be in the future";
+        errorYear.textContent = "date can't be in the future";
         return false;
     } else if (inputDate === 0){
         isValid = true
+        for(let i = 0; i < inputBorders.length; i++){
+            inputBorders[i].style.borderColor = '#cccccc';
+        }
+        errorDay.textContent = ""; 
+        errorMonth.textContent = "";
+        errorYear.textContent = "";
         return true;
     } else {
         isValid = true;
+        for(let i = 0; i < inputBorders.length; i++){
+            inputBorders[i].style.borderColor = '#cccccc';
+        }
+        errorDay.textContent = ""; 
+        errorMonth.textContent = "";
+        errorYear.textContent = "";        
         return true;
     }
 }
@@ -48,7 +69,7 @@ dayInputElement.addEventListener('input', () => {
     } else if (+dayInputElement.value === 0){
         errorDay.textContent = 'Please enter a number';
         isValid = false; 
-    } else if (calculateValidDate() === false){
+    } else if (!calculateValidDate()){
         errorDay.textContent = 'Date cannot be in the future';
         isValid = false;
     } else {
@@ -64,10 +85,10 @@ monthInputElement.addEventListener('input', () => {
     if(+monthInputElement.value > 12){
         errorMonth.textContent = 'Must be a valid date';
         isValid = false;
-    } else if (+monthInputElement.value === 0){
+    } else if (+monthInputElement.value === 0|| +monthInputElement.value < 1){
         errorMonth.textContent = 'Please enter a number';
         isValid = false;
-    } else if (calculateValidDate() === false){
+    } else if (!calculateValidDate()){
         errorMonth.textContent = 'Date cannot be in the future';
         isValid = false;
     } else {
@@ -81,20 +102,15 @@ monthInputElement.addEventListener('input', () => {
 
 yearInputElement.addEventListener('input', () => {
     if(+yearInputElement.value > currentYear){
-        errorYear.textContent = 'Must be a valid date';
+        errorYear.textContent = 'Must be in the past';
         isValid = false;
     } else if (+yearInputElement.value === 0){
         errorYear.textContent = 'Please enter a number';
         isValid = false; 
+    } else if (!calculateValidDate()){
+        errorYear.textContent = "Whole date can't be in the future";
     } else {
         errorYear.textContent = '';
         isValid = true;
-        if(calculateValidDate() === false){
-            errorYear.textContent = "Date can't be in the future";
-            errorMonth.textContent = "Date can't be in the future";
-            errorDay.textContent = "Date can't be in the future";
-        } else {
-            [errorDay, errorMonth, errorYear] = '';
-        }
     }
 });
