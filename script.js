@@ -35,7 +35,15 @@ function calculateValidDate (){
     const day = +dayInputElement.value;
     const month = +monthInputElement.value;
     const year = +yearInputElement.value;
-    const inputDate = new Date(year, month, day);
+    const inputsArray1 = [day, month, year];
+    const inputDate = new Date(year, month - 1, day);
+    for(let i = 0; i < inputsArray1.length; i++){
+        if(isNaN(inputsArray1[1])){
+            
+        }
+    }
+}
+    
     if(currentDate < inputDate){
         isValid = false;
         for(let i = 0; i < inputBorders.length; i++){
@@ -45,15 +53,6 @@ function calculateValidDate (){
         errorMonth.textContent = "date can't be in the future";
         errorYear.textContent = "date can't be in the future";
         return false;
-    } else if (inputDate === 0){
-        isValid = true
-        for(let i = 0; i < inputBorders.length; i++){
-            inputBorders[i].style.borderColor = '#cccccc';
-        }
-        errorDay.textContent = ""; 
-        errorMonth.textContent = "";
-        errorYear.textContent = "";
-        return true;
     } else {
         isValid = true;
         for(let i = 0; i < inputBorders.length; i++){
@@ -64,7 +63,17 @@ function calculateValidDate (){
         errorYear.textContent = "";       
         return true;
     }
-}
+    /* else if (inputDate == 'Number'){
+        isValid = true;
+        for(let i = 0; i < inputBorders.length; i++){
+            inputBorders[i].style.borderColor = '#cccccc';
+        }
+        errorDay.textContent = ""; 
+        errorMonth.textContent = "";
+        errorYear.textContent = "";
+        return true; */
+
+    
 
 //error functions
 dayInputElement.addEventListener('input', () => {    
@@ -75,7 +84,7 @@ dayInputElement.addEventListener('input', () => {
     } else if (isNaN(+dayInputElement.value)){
         errorDay.textContent = 'Please enter a positive number';
         inputDayBorder.style.borderColor = 'red';
-        isValid = false; 
+        isValid = false;
     } else {
         errorDay.textContent = '';
         inputDayBorder.style.borderColor = '#cccccc';
@@ -88,7 +97,7 @@ monthInputElement.addEventListener('input', () => {
         errorMonth.textContent = 'Must be a valid date';
         inputMonthBorder.style.borderColor = 'red';
         isValid = false;
-    } else if (isNaN(+monthInputElement.value)){
+    } else if (Number.isNaN(+monthInputElement.value)){
         errorMonth.textContent = 'Please enter a positive number';
         inputMonthBorder.style.borderColor = 'red';
         isValid = false;
@@ -96,18 +105,17 @@ monthInputElement.addEventListener('input', () => {
         errorMonth.textContent = '';
         inputMonthBorder.style.borderColor = '#cccccc';
         isValid = true;
-    }
-});
+    }});
 
 yearInputElement.addEventListener('input', () => {
     calculateValidDate();
     if(+yearInputElement.value > currentYear){
         errorYear.textContent = 'Must be in the past';
-        inputYearBorder.style.borderColor = 'red'
+        inputYearBorder.style.borderColor = 'red';
         isValid = false;
     } else if (isNaN(+yearInputElement.value)){
         errorYear.textContent = 'Please enter a number';
-        inputYearBorder.style.borderColor = 'red'
+        inputYearBorder.style.borderColor = 'red';
         isValid = false; 
     } else if (isValid) {
         errorYear.textContent = '';
@@ -126,11 +134,11 @@ arrowButton.addEventListener('click', ()=>{
         if (inputsArray[i].value <= 0){
             inputsArray[i].style.borderColor = 'red';
             if (inputsArray[i] === dayInputElement){
-                errorDay.textContent = 'Please fill the boxes with a number'
+                errorDay.textContent = 'Please fill the boxes with a number';
             } else if (inputsArray[i] === monthInputElement){
-                errorMonth.textContent = 'Please fill the boxes with a number'
+                errorMonth.textContent = 'Please fill the boxes with a number';
             } else {
-                errorYear.textContent = 'Please fill the boxes with a number'
+                errorYear.textContent = 'Please fill the boxes with a number';
             }
         } else {
             inputsArray[i].style.borderColor = '#cccccc';
