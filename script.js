@@ -35,14 +35,21 @@ function calculateValidDate (){
     const day = +dayInputElement.value;
     const month = +monthInputElement.value;
     const year = +yearInputElement.value;
-    const inputsArray1 = [day, month, year];
+    const arrayInputDate1 = [day, month, year];
     const inputDate = new Date(year, month - 1, day);
-    for(let i = 0; i < inputsArray1.length; i++){
-        if(isNaN(inputsArray1[1])){
-            
+    
+    for(let i = 0; i < arrayInputDate1.length; i++){
+        if (arrayInputDate1[i] === day && day === 0){
+            inputDayBorder.style.borderColor = 'red';
+            errorDay.textContent = 'Please enter a number';
+        } else if (arrayInputDate1[i] === month && month === 0){
+            inputMonthBorder.style.borderColor = 'red';
+            errorMonth.textContent = 'Please enter a number';
+        } else if (arrayInputDate1[i] === year && year === 0){
+            inputYearBorder.style.borderColor = 'red';
+            errorYear.textContent = 'Please enter a number';
         }
     }
-}
     
     if(currentDate < inputDate){
         isValid = false;
@@ -63,26 +70,19 @@ function calculateValidDate (){
         errorYear.textContent = "";       
         return true;
     }
-    /* else if (inputDate == 'Number'){
-        isValid = true;
-        for(let i = 0; i < inputBorders.length; i++){
-            inputBorders[i].style.borderColor = '#cccccc';
-        }
-        errorDay.textContent = ""; 
-        errorMonth.textContent = "";
-        errorYear.textContent = "";
-        return true; */
-
-    
+}
 
 //error functions
 dayInputElement.addEventListener('input', () => {    
-    if(+dayInputElement.value > 31){
-        errorDay.textContent = 'Must be a valid date';
+    const dayValue = +dayInputElement.value;
+    
+    if (isNaN(dayValue)) {
+        alert('Please enter a numeric value for the day');
+        errorDay.textContent = 'Please enter a positive number';
         inputDayBorder.style.borderColor = 'red';
         isValid = false;
-    } else if (isNaN(+dayInputElement.value)){
-        errorDay.textContent = 'Please enter a positive number';
+    } else if (dayValue > 31) {
+        errorDay.textContent = 'Must be a valid date';
         inputDayBorder.style.borderColor = 'red';
         isValid = false;
     } else {
@@ -97,7 +97,7 @@ monthInputElement.addEventListener('input', () => {
         errorMonth.textContent = 'Must be a valid date';
         inputMonthBorder.style.borderColor = 'red';
         isValid = false;
-    } else if (Number.isNaN(+monthInputElement.value)){
+    } else if (isNaN(+monthInputElement.value)){
         errorMonth.textContent = 'Please enter a positive number';
         inputMonthBorder.style.borderColor = 'red';
         isValid = false;
@@ -129,6 +129,7 @@ arrowButton.addEventListener('click', ()=>{
     const year2 = +yearInputElement.value;
     const inputDate2 = new Date(year2, month2, day2);
 
+
     //error allerts
     for(let i = 0; i < inputsArray.length; i++){
         if (inputsArray[i].value <= 0){
@@ -137,7 +138,7 @@ arrowButton.addEventListener('click', ()=>{
                 errorDay.textContent = 'Please fill the boxes with a number';
             } else if (inputsArray[i] === monthInputElement){
                 errorMonth.textContent = 'Please fill the boxes with a number';
-            } else {
+            } else if (inputsArray[i] === yearInputElement){
                 errorYear.textContent = 'Please fill the boxes with a number';
             }
         } else {
