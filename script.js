@@ -6,9 +6,9 @@ const yearInputElement = document.querySelector('#year');
 const inputsArray = [dayInputElement, monthInputElement, yearInputElement];
 
 //outputs
-const outputYear = document.querySelector('.button-years');
-const outputMonth = document.querySelector('.button-months');
-const ouputDay = document.querySelector('.button-days');
+const outputYear = document.querySelector('.yearOutput');
+const outputMonth = document.querySelector('.monthOutput');
+const outputDay = document.querySelector('.dayOutput');
 
 //Erros
 const errorDay = document.querySelector('.day-error');
@@ -124,12 +124,6 @@ yearInputElement.addEventListener('input', () => {
 });
 //Output functions
 arrowButton.addEventListener('click', ()=>{
-    const day2 = +dayInputElement.value;
-    const month2 = +monthInputElement.value;
-    const year2 = +yearInputElement.value;
-    const inputDate2 = new Date(year2, month2, day2);
-
-
     //error allerts
     for(let i = 0; i < inputsArray.length; i++){
         if (inputsArray[i].value <= 0){
@@ -144,6 +138,23 @@ arrowButton.addEventListener('click', ()=>{
         } else {
             inputsArray[i].style.borderColor = '#cccccc';
             inputsArray[i].textContent = '';
+        }
+        if (isValid){
+            let birthday = `${yearInputElement.value}/${monthInputElement.value}/${dayInputElement.value}`;
+            let birthdayDate = new Date(birthday);
+            let ageDiffNow = Date.now() - birthdayDate;
+            let ageLessTheBirthday = new Date(ageDiffNow);
+            let ageYears = ageLessTheBirthday.getUTCFullYear() - 1970;
+            let ageMonths = ageLessTheBirthday.getUTCMonth();
+            let ageDays = ageLessTheBirthday.getUTCDay();
+            //outputs
+            outputYear.textContent = ageYears;
+            outputMonth.textContent = ageMonths;
+            outputDay.textContent = ageDays;
+        } else{
+            outputYear.textContent = '- -';
+            outputMonth.textContent = '- -';
+            outputDay.textContent = '- -';
         }
     }
 });
