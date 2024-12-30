@@ -123,38 +123,42 @@ yearInputElement.addEventListener('input', () => {
     }
 });
 //Output functions
-arrowButton.addEventListener('click', ()=>{
-    //error allerts
-    for(let i = 0; i < inputsArray.length; i++){
-        if (inputsArray[i].value <= 0){
+arrowButton.addEventListener('click', () => {
+    //error alerts
+    for (let i = 0; i < inputsArray.length; i++) {
+        if (inputsArray[i].value <= 0) {
             inputsArray[i].style.borderColor = 'red';
-            if (inputsArray[i] === dayInputElement){
+            if (inputsArray[i] === dayInputElement) {
                 errorDay.textContent = 'Please fill the boxes with a number';
-            } else if (inputsArray[i] === monthInputElement){
+            } else if (inputsArray[i] === monthInputElement) {
                 errorMonth.textContent = 'Please fill the boxes with a number';
-            } else if (inputsArray[i] === yearInputElement){
+            } else if (inputsArray[i] === yearInputElement) {
                 errorYear.textContent = 'Please fill the boxes with a number';
             }
         } else {
             inputsArray[i].style.borderColor = '#cccccc';
             inputsArray[i].textContent = '';
         }
-        if (isValid){
-            let birthday = `${yearInputElement.value}/${monthInputElement.value}/${dayInputElement.value}`;
-            let birthdayDate = new Date(birthday);
-            let ageDiffNow = Date.now() - birthdayDate;
-            let ageLessTheBirthday = new Date(ageDiffNow);
-            let ageYears = ageLessTheBirthday.getUTCFullYear() - 1970;
-            let ageMonths = ageLessTheBirthday.getUTCMonth();
-            let ageDays = ageLessTheBirthday.getUTCDay();
-            //outputs
-            outputYear.textContent = ageYears;
-            outputMonth.textContent = ageMonths;
-            outputDay.textContent = ageDays;
-        } else{
-            outputYear.textContent = '- -';
-            outputMonth.textContent = '- -';
-            outputDay.textContent = '- -';
-        }
+    }
+
+    if (isValid) {
+        const birthday = new Date(`${yearInputElement.value}/${monthInputElement.value}/${dayInputElement.value}`);
+
+        let ageInYears = currentYear - birthday.getFullYear();
+        let ageInMonths = currentMonth - birthday.getMonth() - 1;
+        let ageInDays = currentDay - birthday.getDate();
+
+        if (currentMonth < birthday.getMonth()) {
+            ageInMonths += (birthday.getMonth() - currentMonth);
+        } else if(currentDate < birthday.getDate())//you still need to complete this part
+
+        //outputs
+        outputYear.textContent = ageInYears;
+        outputMonth.textContent = ageInMonths;
+        outputDay.textContent = ageInDays;
+    } else {
+        outputYear.textContent = '- -';
+        outputMonth.textContent = '- -';
+        outputDay.textContent = '- -';
     }
 });
