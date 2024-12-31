@@ -30,8 +30,8 @@ let inputDayBorder = document.querySelector('.day input');
 let inputMonthBorder = document.querySelector('.month input');
 let inputYearBorder = document.querySelector('.year input');
 
-
-function calculateValidDate (){
+//call back functions
+function calculateValidDate(){
     const day = +dayInputElement.value;
     const month = +monthInputElement.value;
     const year = +yearInputElement.value;
@@ -69,6 +69,14 @@ function calculateValidDate (){
         errorMonth.textContent = "";
         errorYear.textContent = "";       
         return true;
+    }
+}
+
+
+//continue here
+function daysInMonth(){
+    const daysInMonthObj = {
+        1:{theMonth: 'January'}
     }
 }
 
@@ -149,8 +157,9 @@ arrowButton.addEventListener('click', () => {
         let ageInDays = currentDay - birthday.getDate();
 
         if (currentMonth < birthday.getMonth()) {
-            ageInMonths += (birthday.getMonth() - currentMonth);
-        } else if(currentDate < birthday.getDate())//you still need to complete this part
+            ageInYears--;
+            ageInMonths = 12 - (birthday.getMonth() - currentMonth);
+        } //WE NEED A AN ELSE IF HERE IF THE BIRTHDAY DAY IS LATER THAN THE CURRENT ONE.
 
         //outputs
         outputYear.textContent = ageInYears;
