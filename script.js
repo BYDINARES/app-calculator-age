@@ -71,21 +71,35 @@ function calculateValidDate(){
         return true;
     }
 }
-
-
-//continue here
-function daysInMonth(){
+let maximumAmountOfDays = 0;
+function daysInMonth(monthInput, yearInput){
     const daysInMonthObj = {
-        1:{theMonth: 'January'}
+        1: {theMonth: 'January', days: 31},
+        2: {theMonth: 'February', days: 28},
+        3: {theMonth: 'March', days: 31},
+        4: {theMonth: 'April', days: 30},
+        5: {theMonth: 'May', days: 31},
+        6: {theMonth: 'June', days: 30},
+        7: {theMonth: 'July', days: 31},
+        8: {theMonth: 'August', days: 31},
+        9: {theMonth: 'September', days: 30},
+        10: {theMonth: 'October', days: 31},
+        11: {theMonth: 'November', days: 30},
+        12: {theMonth: 'December', days: 31},
+    }
+    if (daysInMonthObj[monthInput]){
+        maximumAmountOfDays = daysInMonthObj[monthInput].days;
+        return true;
+    } else {
+        return false;
     }
 }
 
 //error functions
 dayInputElement.addEventListener('input', () => {    
     const dayValue = +dayInputElement.value;
-    
+
     if (isNaN(dayValue)) {
-        alert('Please enter a numeric value for the day');
         errorDay.textContent = 'Please enter a positive number';
         inputDayBorder.style.borderColor = 'red';
         isValid = false;
@@ -105,6 +119,21 @@ monthInputElement.addEventListener('input', () => {
         errorMonth.textContent = 'Must be a valid date';
         inputMonthBorder.style.borderColor = 'red';
         isValid = false;
+    } else if (daysInMonth(+monthInputElement.value)){
+        /* errorMonth.textContent = 'Wrong amount of days in the month';
+        errorDay.textContent = 'Wrong amount of days in the month';
+        inputMonthBorder.style.borderColor = 'red';
+        inputDayBorder.style.borderColor = 'red';
+        isValid = false; */
+        if (dayInputElement.value > maximumAmountOfDays){
+            errorDay.textContent = 'Wrong amount of days in the month';
+            inputDayBorder.style.borderColor = 'red';
+            isValid = 'false';
+        } else {
+            errorDay.textContent = '';
+            inputDayBorder.style.borderColor = '#cccccc';
+            isValid = true;
+        }
     } else if (isNaN(+monthInputElement.value)){
         errorMonth.textContent = 'Please enter a positive number';
         inputMonthBorder.style.borderColor = 'red';
@@ -113,7 +142,8 @@ monthInputElement.addEventListener('input', () => {
         errorMonth.textContent = '';
         inputMonthBorder.style.borderColor = '#cccccc';
         isValid = true;
-    }});
+    }
+});
 
 yearInputElement.addEventListener('input', () => {
     calculateValidDate();
