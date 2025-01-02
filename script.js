@@ -1,4 +1,4 @@
-//inputs
+//inputs :)
 let isValid = false;
 const dayInputElement = document.querySelector('#day');
 const monthInputElement = document.querySelector('#month');
