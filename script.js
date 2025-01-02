@@ -87,8 +87,19 @@ function daysInMonth(monthInput, yearInput){
         11: {theMonth: 'November', days: 30},
         12: {theMonth: 'December', days: 31},
     }
+
+    function isLeapYear(year){
+        return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+    }
+    
+
     if (daysInMonthObj[monthInput]){
-        maximumAmountOfDays = daysInMonthObj[monthInput].days;
+        if (daysInMonth[monthInput] == 2 && isLeapYear(yearInput)){
+            maximumAmountOfDays = 2;
+        } else {
+            maximumAmountOfDays = daysInMonthObj[monthInput].days;
+            return true;
+        }
         return true;
     } else {
         return false;
@@ -120,11 +131,6 @@ monthInputElement.addEventListener('input', () => {
         inputMonthBorder.style.borderColor = 'red';
         isValid = false;
     } else if (daysInMonth(+monthInputElement.value)){
-        /* errorMonth.textContent = 'Wrong amount of days in the month';
-        errorDay.textContent = 'Wrong amount of days in the month';
-        inputMonthBorder.style.borderColor = 'red';
-        inputDayBorder.style.borderColor = 'red';
-        isValid = false; */
         if (dayInputElement.value > maximumAmountOfDays){
             errorDay.textContent = 'Wrong amount of days in the month';
             inputDayBorder.style.borderColor = 'red';
@@ -147,6 +153,7 @@ monthInputElement.addEventListener('input', () => {
 
 yearInputElement.addEventListener('input', () => {
     calculateValidDate();
+    daysInMonth(+monthInputElement.value, +yearInputElement.value)
     if(+yearInputElement.value > currentYear){
         errorYear.textContent = 'Must be in the past';
         inputYearBorder.style.borderColor = 'red';
@@ -155,7 +162,12 @@ yearInputElement.addEventListener('input', () => {
         errorYear.textContent = 'Please enter a number';
         inputYearBorder.style.borderColor = 'red';
         isValid = false; 
-    } else if (isValid) {
+    } else if (+dayInputElement.value > maximumAmountOfDays){
+        errorDay.textContent = 'Wrong amount of days in the month';
+        inputDayBorder.style.borderColor = 'red';
+        isValid = 'false'; //continue here, because I don't know why this doesn't work.
+    } 
+    else if (isValid) {
         errorYear.textContent = '';
         inputYearBorder.style.borderColor = '#cccccc';
     }
@@ -166,7 +178,7 @@ arrowButton.addEventListener('click', () => {
     for (let i = 0; i < inputsArray.length; i++) {
         if (inputsArray[i].value <= 0) {
             inputsArray[i].style.borderColor = 'red';
-            if (inputsArray[i] === dayInputElement) {
+            if (inputsArray[i] === dayInputElement){
                 errorDay.textContent = 'Please fill the boxes with a number';
             } else if (inputsArray[i] === monthInputElement) {
                 errorMonth.textContent = 'Please fill the boxes with a number';
@@ -180,7 +192,11 @@ arrowButton.addEventListener('click', () => {
     }
 
     if (isValid) {
-        const birthday = new Date(`${yearInputElement.value}/${monthInputElement.value}/${dayInputElement.value}`);
+        const birthday = new Date(
+            yearInputElement.value, 
+            monthInputElement.value -1, 
+            dayInputElement.value
+        );
 
         let ageInYears = currentYear - birthday.getFullYear();
         let ageInMonths = currentMonth - birthday.getMonth() - 1;
@@ -189,7 +205,13 @@ arrowButton.addEventListener('click', () => {
         if (currentMonth < birthday.getMonth()) {
             ageInYears--;
             ageInMonths = 12 - (birthday.getMonth() - currentMonth);
-        } //WE NEED A AN ELSE IF HERE IF THE BIRTHDAY DAY IS LATER THAN THE CURRENT ONE.
+        } else if (currentMonth === birthday.getMonth() && currentDay < birthday.getDate()){
+            ageInYears--;
+            ageInMonths = 11;
+            const daysInThePriorMonth = new Date(currentYear, currentMonth -1, 0).getDate();
+            ageInDays = daysInThePriorMonth - birthday.getDate() + currentDay;
+        }
+            //WE NEED A AN ELSE IF HERE IF THE BIRTHDAY DAY IS LATER THAN THE CURRENT ONE.
 
         //outputs
         outputYear.textContent = ageInYears;
@@ -201,3 +223,27 @@ arrowButton.addEventListener('click', () => {
         outputDay.textContent = '- -';
     }
 });
+/* function calculateDaysFromDate(date) {
+    const inputDate = new Date(date);
+    const timeDifference = currentDate - inputDate;
+    const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    return daysDifference;
+}
+function calculateTimePassed(date) {
+    const inputDate = new Date(date);
+    let years = currentYear - inputDate.getFullYear();
+    let months = currentMonth - (inputDate.getMonth() + 1);
+    let days = currentDay - inputDate.getDate();
+
+    if (days < 0) {
+        months--;
+        days += new Date(currentYear, currentMonth - 1, 0).getDate();
+    }
+
+    if (months < 0) {
+        years--;
+        months += 12;
+    }
+
+    return { years, months, days };
+} */
