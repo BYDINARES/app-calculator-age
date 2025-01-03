@@ -73,7 +73,7 @@ function calculateValidDate(){
 }
 let maximumAmountOfDays = 0;
 function daysInMonth(monthInput, yearInput){
-    const daysInMonthObj = {
+    let daysInMonthObj = {
         1: {theMonth: 'January', days: 31},
         2: {theMonth: 'February', days: 28},
         3: {theMonth: 'March', days: 31},
@@ -93,17 +93,11 @@ function daysInMonth(monthInput, yearInput){
     }
     
 
-    if (daysInMonthObj[monthInput]){
-        if (daysInMonth[monthInput] == 2 && isLeapYear(yearInput)){
-            maximumAmountOfDays = 2;
-        } else {
-            maximumAmountOfDays = daysInMonthObj[monthInput].days;
-            return true;
-        }
-        return true;
-    } else {
-        return false;
-    }
+    
+    if (monthInput === 2 && isLeapYear(yearInput)){
+        daysInMonthObj[2].days = 29;
+    } 
+    maximumAmountOfDays = daysInMonthObj[monthInput].days;
 }
 
 //error functions
@@ -131,7 +125,7 @@ monthInputElement.addEventListener('input', () => {
         inputMonthBorder.style.borderColor = 'red';
         isValid = false;
     } else if (daysInMonth(+monthInputElement.value)){
-        if (dayInputElement.value > maximumAmountOfDays){
+        if (+dayInputElement.value > maximumAmountOfDays){
             errorDay.textContent = 'Wrong amount of days in the month';
             inputDayBorder.style.borderColor = 'red';
             isValid = 'false';
@@ -165,9 +159,8 @@ yearInputElement.addEventListener('input', () => {
     } else if (+dayInputElement.value > maximumAmountOfDays){
         errorDay.textContent = 'Wrong amount of days in the month';
         inputDayBorder.style.borderColor = 'red';
-        isValid = 'false'; //continue here, because I don't know why this doesn't work.
-    } 
-    else if (isValid) {
+        isValid = 'false';
+    } else if (isValid) {
         errorYear.textContent = '';
         inputYearBorder.style.borderColor = '#cccccc';
     }
@@ -187,7 +180,9 @@ arrowButton.addEventListener('click', () => {
             }
         } else {
             inputsArray[i].style.borderColor = '#cccccc';
-            inputsArray[i].textContent = '';
+            errorDay.textContent = '';
+            errorMonth.textContent = '';
+            errorYear.textContent = '';
         }
     }
 
@@ -201,49 +196,23 @@ arrowButton.addEventListener('click', () => {
         let ageInYears = currentYear - birthday.getFullYear();
         let ageInMonths = currentMonth - birthday.getMonth() - 1;
         let ageInDays = currentDay - birthday.getDate();
+        const daysInThePriorMonth = new Date(currentYear, currentMonth -1, 0).getDate();
 
-        if (currentMonth < birthday.getMonth()) {
+
+        if(ageInDays < 0){
+            ageInDays += daysInThePriorMonth;
+            ageInMonths--;
+        } else if (ageInMonths < 0){
+            ageInMonths = 12;
             ageInYears--;
-            ageInMonths = 12 - (birthday.getMonth() - currentMonth);
-        } else if (currentMonth === birthday.getMonth() && currentDay < birthday.getDate()){
-            ageInYears--;
-            ageInMonths = 11;
-            const daysInThePriorMonth = new Date(currentYear, currentMonth -1, 0).getDate();
-            ageInDays = daysInThePriorMonth - birthday.getDate() + currentDay;
         }
-            //WE NEED A AN ELSE IF HERE IF THE BIRTHDAY DAY IS LATER THAN THE CURRENT ONE.
-
         //outputs
-        outputYear.textContent = ageInYears;
-        outputMonth.textContent = ageInMonths;
-        outputDay.textContent = ageInDays;
+        outputYear.textContent = ageInYears >= 0 ? ageInYears : 0;
+        outputMonth.textContent = ageInMonths >= 0 ? ageInMonths : 0;
+        outputDay.textContent = ageInDays >= 0 ? ageInDays : 0;
     } else {
         outputYear.textContent = '- -';
         outputMonth.textContent = '- -';
         outputDay.textContent = '- -';
     }
 });
-/* function calculateDaysFromDate(date) {
-    const inputDate = new Date(date);
-    const timeDifference = currentDate - inputDate;
-    const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-    return daysDifference;
-}
-function calculateTimePassed(date) {
-    const inputDate = new Date(date);
-    let years = currentYear - inputDate.getFullYear();
-    let months = currentMonth - (inputDate.getMonth() + 1);
-    let days = currentDay - inputDate.getDate();
-
-    if (days < 0) {
-        months--;
-        days += new Date(currentYear, currentMonth - 1, 0).getDate();
-    }
-
-    if (months < 0) {
-        years--;
-        months += 12;
-    }
-
-    return { years, months, days };
-} */
