@@ -80,7 +80,17 @@ function daysInMonth(monthInput, yearInput){
     
     if (monthInput === 2 && isLeapYear(yearInput)){
         daysInMonthObj[2].days = 29;
-    } 
+    } else if (+dayInputElement.value.trim() > maximumAmountOfDays){
+        if(maximumAmountOfDays !== 0){
+            errorDay.textContent = "Worng amount of days in the month";
+            inputDayBorder.style.borderColor = 'red';
+            isValidDay = false;
+        } else {
+            errorDay.textContent = "";
+            inputDayBorder.style.borderColor = '#cccccc';
+            isValidDay = true;
+        }
+    }
     maximumAmountOfDays = daysInMonthObj[monthInput].days;
 }
 
@@ -89,16 +99,19 @@ let isValidDay = true;
 dayInputElement.addEventListener('input', () => {    
     const dayValue = +dayInputElement.value.trim();
 
-    if (isNaN(dayValue) || dayValue <= 0) {
-        errorDay.textContent = "Please don't enter a letter";
+    if (isNaN(dayValue) || dayValue <= 0){
+        errorDay.textContent = "Please enter a valid NUMBER";
         inputDayBorder.style.borderColor = 'red';
         isValidDay = false;
     } else if (dayValue > 31) {
         errorDay.textContent = 'Must be a valid date';
         inputDayBorder.style.borderColor = 'red';
         isValidDay = false;
-    } 
-    else {
+    } else if (dayValue > maximumAmountOfDays && maximumAmountOfDays !== 0){
+        errorDay.textContent = `Days must be between 1 and ${maximumAmountOfDays}`;
+        inputDayBorder.style.borderColor = 'red';
+        isValidDay = false;
+    } else {
         errorDay.textContent = '';
         inputDayBorder.style.borderColor = '#cccccc';
         isValidDay = true;
@@ -112,8 +125,8 @@ monthInputElement.addEventListener('input', () => {
         errorMonth.textContent = 'Please enter a valid month';
         inputMonthBorder.style.borderColor = 'red';
         isValidMonth = false;
-    } else if (daysInMonth(+monthInputElement.value)) {
-        if (+dayInputElement.value > maximumAmountOfDays){
+    } else if (daysInMonth(monthValue)) {
+        if (+dayInputElement.value.trim() > maximumAmountOfDays){
             errorDay.textContent = 'Wrong amount of days in the month';
             inputDayBorder.style.borderColor = 'red';
             isValidDay = false;
@@ -131,29 +144,31 @@ monthInputElement.addEventListener('input', () => {
 
 let isValidYear = true;
 yearInputElement.addEventListener('input', () => {
-    daysInMonth(+monthInputElement.value, +yearInputElement.value);
-    if(+yearInputElement.value > currentYear){
+    daysInMonth(+monthInputElement.value.trim(), +yearInputElement.value.trim());
+    if(+yearInputElement.value.trim() > currentYear){
         errorYear.textContent = 'Must be in the past';
         inputYearBorder.style.borderColor = 'red';
         isValidYear = false;
-    } else if (isNaN(yearInputElement.value)){
+    } else if (isNaN(+yearInputElement.value.trim())){
         errorYear.textContent = 'Please enter a number';
         inputYearBorder.style.borderColor = 'red';
         isValidYear = false;
-    } else if (+dayInputElement.value > maximumAmountOfDays){
+    } else if (+dayInputElement.value.trim() > maximumAmountOfDays){
         errorDay.textContent = 'Wrong amount of days in the month';
         inputDayBorder.style.borderColor = 'red';
         isValidDay = false;
-    } else if (+dayInputElement.value <= maximumAmountOfDays){
+    } else if (+dayInputElement.value.trim() <= maximumAmountOfDays){
         errorDay.textContent = '';
         inputDayBorder.style.borderColor = '#cccccc';
-        isValidDay = true;
+        isValidDay = true; 
     } else {
         errorYear.textContent = '';
         inputYearBorder.style.borderColor = '#cccccc';
         isValidYear = true;
     }
 });
+
+daysInMonth(+monthInputElement.value.trim(), +yearInputElement.value.trim());
 
 function isValid(){
     return isValidDay && isValidMonth && isValidYear;
