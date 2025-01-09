@@ -37,7 +37,6 @@ function calculateValidDate(){
     const inputDate = new Date(year, month - 1, day);
     
     if(currentDate < inputDate){
-        isValid = false;
         for(let i = 0; i < inputBorders.length; i++){
             inputBorders[i].style.borderColor = 'red';
         }
@@ -46,7 +45,6 @@ function calculateValidDate(){
         errorYear.textContent = "date can't be in the future";
         return false;
     } else {
-        isValid = true;
         for(let i = 0; i < inputBorders.length; i++){
             inputBorders[i].style.borderColor = '#cccccc';
         }
@@ -121,39 +119,32 @@ dayInputElement.addEventListener('input', () => {
 let isValidMonth = true;
 monthInputElement.addEventListener('input', () => {
     const monthValue = +monthInputElement.value.trim();
-    if(+monthValue > 12 || isNaN(monthValue) || monthValue <= 0){
-        errorMonth.textContent = 'Please enter a valid month';
+
+    if(+monthValue > 12 || isNaN(monthValue) || monthValue == 0){
+        errorMonth.textContent = 'Please enter a valid NUMBER';
         inputMonthBorder.style.borderColor = 'red';
         isValidMonth = false;
-    } else if (daysInMonth(monthValue)) {
-        if (+dayInputElement.value.trim() > maximumAmountOfDays){
-            errorDay.textContent = 'Wrong amount of days in the month';
-            inputDayBorder.style.borderColor = 'red';
-            isValidDay = false;
-        } else {
-            errorDay.textContent = '';
-            inputDayBorder.style.borderColor = '#cccccc';
-            isValidDay = true;
-        }
     } else {
         errorMonth.textContent = '';
         inputMonthBorder.style.borderColor = '#cccccc';
         isValidMonth = true;
     }
+
+    daysInMonth(monthValue, +yearInputElement.value.trim());
+
+    if (+dayInputElement.value.trim() > maximumAmountOfDays){
+        errorDay.textContent = `Days must be between 1 and ${maximumAmountOfDays}`;
+        inputDayBorder.style.borderColor = 'red';
+        isValidDay = false;
+    } else {
+        errorDay.textContent = '';
+        inputDayBorder.style.borderColor = '#cccccc';
+        isValidDay = true;
+    }
 });
 
 let isValidYear = true;
 yearInputElement.addEventListener('input', () => {
-    daysInMonth(+monthInputElement.value.trim(), +yearInputElement.value.trim());
-    if (+dayInputElement.value.trim() > maximumAmountOfDays){
-        errorDay.textContent = 'Wrong amount of days in the month';
-        inputDayBorder.style.borderColor = 'red';
-        isValidDay = false;
-    } else if (+dayInputElement.value.trim() <= maximumAmountOfDays){
-        errorDay.textContent = '';
-        inputDayBorder.style.borderColor = '#cccccc';
-        isValidDay = true; 
-    }
     if(+yearInputElement.value.trim() > currentYear){
         errorYear.textContent = 'Must be in the past';
         inputYearBorder.style.borderColor = 'red';
@@ -163,9 +154,21 @@ yearInputElement.addEventListener('input', () => {
         inputYearBorder.style.borderColor = 'red';
         isValidYear = false;
     } else {
-        errorYear.textContent = '';
+        errorYear.textContent = ''; 
         inputYearBorder.style.borderColor = '#cccccc';
         isValidYear = true;
+    }
+
+    daysInMonth(+monthInputElement.value.trim(), +yearInputElement.value.trim());
+
+    if (+dayInputElement.value.trim() > maximumAmountOfDays){
+        errorDay.textContent = `Days must be between 1 and ${maximumAmountOfDays}`;
+        inputDayBorder.style.borderColor = 'red';
+        isValidDay = false;
+    } else if (+dayInputElement.value.trim() <= maximumAmountOfDays){
+        errorDay.textContent = '';
+        inputDayBorder.style.borderColor = '#cccccc';
+        isValidDay = true; 
     }
 });
 
@@ -179,8 +182,8 @@ function isValid(){
 //Output functions
 arrowButton.addEventListener('click', () => {
     //error alerts
-
-    if (isValid() === true) {
+    calculateValidDate();
+    if (isValid() === true && calculateValidDate()) {
         const birthday = new Date(
             yearInputElement.value, 
             monthInputElement.value -1, 
@@ -214,36 +217,6 @@ arrowButton.addEventListener('click', () => {
         outputYear.textContent = '- -';
         outputMonth.textContent = '- -';
         outputDay.textContent = '- -';
+
     }
 });
-
-/* function calculateAge(birthDate) {
-    const currentDate = new Date();
-    let years = currentDate.getFullYear() - birthDate.getFullYear();
-    let months = currentDate.getMonth() - birthDate.getMonth();
-    let days = currentDate.getDate() - birthDate.getDate();
-
-    if (days < 0) {
-        months--;
-        days += new Date(currentDate.getFullYear(), currentDate.getMonth(), 0).getDate();
-    }
-
-    if (months < 0) {
-        years--;
-        months += 12;
-    }
-
-    return { years, months, days };
-}
-
-arrowButton.addEventListener('click', () => {
-    const year = parseInt(document.getElementById('yearInput').value);
-    const month = parseInt(document.getElementById('monthInput').value) - 1; // Months are 0-based
-    const day = parseInt(document.getElementById('dayInput').value);
-    const birthDate = new Date(year, month, day);
-
-    const age = calculateAge(birthDate);
-    console.log(`Age: ${age.years} years, ${age.months} months, and ${age.days} days`);
-}); */
-
-// ...existing code...
