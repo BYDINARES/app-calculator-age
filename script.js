@@ -184,18 +184,26 @@ arrowButton.addEventListener('click', () => {
     //error alerts
     calculateValidDate();
     if (isValid() === true && calculateValidDate()) {
-        const birthday = new Date(
-            yearInputElement.value, 
-            monthInputElement.value -1, 
-            dayInputElement.value
-        );
+        //date inputs
+        let yearValue2 = parseInt(yearInputElement.value.trim(), 10);
+        let monthValue2 = parseInt(monthInputElement.value.trim(), 10);
+        let dayValue2 = parseInt(dayInputElement.value.trim(), 10);
 
-        let ageInYears = currentYear - birthday.getFullYear();
+        //Birthday date
+        const birthday = new Date(yearValue2, monthValue2 - 1, dayValue2);
+        const birthdayYear = birthday.getFullYear();
+
+        if (birthdayYear < 100){
+        birthdayYear -= 1900;
+        }
+
+        //outputs numbers
+        let ageInYears = currentYear - birthdayYear;
         let ageInMonths = currentMonth - birthday.getMonth() - 1;
         let ageInDays = currentDay - birthday.getDate();
         const daysInThePriorMonth = new Date(currentYear, currentMonth -1, 0).getDate();
 
-
+        // edge cases
         if(ageInDays < 0){
             ageInDays += daysInThePriorMonth;
             ageInMonths--;
@@ -209,6 +217,7 @@ arrowButton.addEventListener('click', () => {
         if (ageInYears < 0) {
             ageInYears = 0;
         }
+
         //outputs
         outputYear.textContent = ageInYears >= 0 ? ageInYears : 0;
         outputMonth.textContent = ageInMonths >= 0 ? ageInMonths : 0;
@@ -217,6 +226,5 @@ arrowButton.addEventListener('click', () => {
         outputYear.textContent = '- -';
         outputMonth.textContent = '- -';
         outputDay.textContent = '- -';
-
     }
 });
