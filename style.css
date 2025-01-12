@@ -95,6 +95,33 @@ form {
     display: flex;
 }
 
+/*arrow-container*/
+.arrow-container {
+    display: flex;
+    justify-content: center;
+}
+
+/*The line*/
+.line {
+    background-color: grey;
+    height: 2px;
+    width: 100%;
+    position: relative;
+    align-items: center;
+    z-index: 0;
+    top: 16%;
+}
+#arrow-button {
+    background-color: blueviolet;
+    border-radius: 50%;
+    padding: 1.3rem;
+    cursor: pointer;
+    border: none;  
+    position: relative;      
+    z-index: 1;
+    transition: background-color 0.4s ease, transform 0.2s ease;
+}
+
 /*Erros*/
 
 .errors {
@@ -121,43 +148,12 @@ form {
 }
 
 .bottom li {
-    font-size: 5rem;
+    font-size: 3.5rem;
 }
 
 span {
     color: purple;
 }
-
-/*arrow-container*/
-
-.arrow-container {
-    display: flex;
-    justify-content: center;
-}
-
-
-
-.line {
-    background-color: grey;
-    height: 2px;
-    width: 100%;
-    position: relative;
-    align-items: center;
-    z-index: 0;
-    top: 16%;
-}
-
-#arrow-button {
-    background-color: blueviolet;
-    border-radius: 50%;
-    padding: 1.3rem;
-    cursor: pointer;
-    border: none;  
-    position: relative;      
-    z-index: 1;
-    transition: background-color 0.4s ease, transform 0.2s ease;
-}
-
    /*Hover and Focus*/
    #arrow-button:hover, #arrow-button:focus{
     background-color: black;
@@ -174,7 +170,7 @@ span {
     }
 
     .top-buttons input {
-        font-size: 4rem;
+        font-size: 2.5rem;
     }
 
     .bottom ul {
@@ -183,7 +179,7 @@ span {
     }
     .bottom li {
         font-size: 6rem;
-        line-height: 7rem;
+        line-height: 4.5rem;
     }
     
     .arrow-container {
@@ -192,9 +188,20 @@ span {
 }
 
 @media screen and (min-width: 1200px) {
+    .line {
+        top: 50%;
+        left: 2%;
+    }
+    
+    
     .bottom {
         padding-left: 0%;
         display: flex;
         justify-content: center;
+    }
+
+    .bottom li {
+        font-size: 4rem;
+        line-height: 4.5rem;
     }
 }
