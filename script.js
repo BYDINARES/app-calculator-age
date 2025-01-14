@@ -182,6 +182,9 @@ function isValid(){
 //Output functions
 arrowButton.addEventListener('click', () => {
     //error alerts
+
+    let listItems = document.querySelectorAll(".bottom li");
+
     calculateValidDate();
     if (isValid() === true && calculateValidDate()) {
         //date inputs
@@ -218,6 +221,13 @@ arrowButton.addEventListener('click', () => {
             ageInYears = 0;
         }
 
+        //animation
+        listItems.forEach((item, index) => {
+            setTimeout(() => {
+              item.classList.add("animate");
+            }, index * 200);
+          });
+        
         //outputs
         outputYear.textContent = ageInYears >= 0 ? ageInYears : 0;
         outputMonth.textContent = ageInMonths >= 0 ? ageInMonths : 0;
