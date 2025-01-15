@@ -225,8 +225,14 @@ arrowButton.addEventListener('click', () => {
         listItems.forEach((item, index) => {
             setTimeout(() => {
               item.classList.add("animate");
-            }, index * 200);
-          });
+            }, index * 150);
+        });
+        // Optionally, remove the class after animation completes to reset
+        setTimeout(() => {
+            listItems.forEach(item => {
+                item.classList.remove('animate');
+            });
+        }, 600);
         
         //outputs
         outputYear.textContent = ageInYears >= 0 ? ageInYears : 0;

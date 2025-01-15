@@ -1,5 +1,5 @@
 html {
-    height: 100vh;
+    height: 800px;
 }
 
 body {
@@ -152,13 +152,14 @@ form {
 
 .bottom li {
     font-size: 5rem;
-    transform: translateY(20px); /* Starts below the normal position */
-    transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition */
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.5s ease, color 0.7s ease;
 }
 
 .bottom li.animate{
-    opacity: 1; /* Make visible */
-    transform: translateY(0); /* Move to original position */
+    opacity: 1; 
+    transform: translateY(0); 
+    color: rgb(255, 20, 239);
 }
 
 span {
@@ -213,11 +214,24 @@ span {
 
     .top-buttons {
         padding-right: 0%;
+        gap: 6%;
+        padding-top: 0%;
     }
-    
+
+    .top-buttons input{
+        font-size: 150%;
+    }
+
+    .errors {
+        font-size: 0.8rem;
+    }
 
     #arrow-button {
-        padding: 18px;
+        padding: 0.5%;
+    }
+
+    svg {
+        height: 5%;
     }
     
     .bottom {
@@ -227,7 +241,7 @@ span {
     }
 
     .bottom li {
-        font-size: 5rem;
-        line-height: 5rem;
+        font-size: 4rem;
+        line-height: 4rem;
     }
 }
