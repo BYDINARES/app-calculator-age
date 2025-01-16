@@ -50,7 +50,7 @@ body {
     /*padding: 2rem 1.5rem;*/
     width: 100%;
     height: auto;
-    font-size: 3.5rem;
+    font-size: 200%;
     border-radius: 0.7rem;
     transition: background-color 0.4s ease, transform 0.2s ease;
     cursor: pointer;
@@ -117,7 +117,7 @@ form {
     position: absolute;
     background-color: blueviolet;
     border-radius: 50%;
-    padding: 5%;
+    padding: 3%;
     cursor: pointer;
     border: none;  
     z-index: 1;
@@ -129,7 +129,7 @@ form {
 
 .errors {
     color: red;
-    font-size: 1rem;
+    font-size: 0.8rem;
     margin-top: 0%;
 }   
 
@@ -151,14 +151,14 @@ form {
 }
 
 .bottom li {
-    font-size: 5rem;
-    transform: translateY(10px);
+    font-size: 4.2rem;
+    transform: translateY(0px);
     transition: opacity 0.5s ease, transform 0.5s ease, color 0.7s ease;
 }
 
 .bottom li.animate{
     opacity: 1; 
-    transform: translateY(0); 
+    transform: translateY(-10px);
     color: rgb(255, 20, 239);
 }
 
@@ -171,8 +171,19 @@ span {
     outline: none;
     transform: scale(1.1,1.1);
 }
-
 /*Responsive screens*/
+@media screen and (min-width: 768px){
+    .top{
+        padding-top: 0%;
+    }
+    .top-buttons{
+        padding-top: 3%;
+    }
+    .top-buttons input{
+        font-size: 250%;
+    }
+}
+
 @media screen and (min-width: 992px){
     /*Top*/
     .top-buttons {
@@ -181,11 +192,11 @@ span {
     }
 
     .top-buttons input {
-        font-size: 4rem;
+        font-size: 3.5rem;
     }
 
     .errors{
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
 
     .bottom ul {
@@ -193,7 +204,7 @@ span {
         margin-top: 0%
     }
     .bottom li {
-        font-size: 7rem;
+        font-size: 6.5rem;
         line-height: 7rem;
     }
     
@@ -208,8 +219,13 @@ span {
 
 @media screen and (min-width: 1200px) {
     .whole-container{
-        width: 50%;
-        height: 70%;
+        width: 60%;
+        height: 60%;
+    }
+
+    .top{
+        padding-top: 1%;
+        height: 45%;
     }
 
     .top-buttons {
@@ -219,29 +235,27 @@ span {
     }
 
     .top-buttons input{
-        font-size: 150%;
+        font-size: 250%;
     }
 
     .errors {
-        font-size: 0.8rem;
+        font-size: 1rem;
     }
 
     #arrow-button {
-        padding: 0.5%;
-    }
-
-    svg {
-        height: 5%;
+        padding: 2%;
     }
     
+    /*Bottom*/
     .bottom {
         padding-left: 0%;
         display: flex;
         justify-content: center;
+        height: 55%;
     }
 
     .bottom li {
-        font-size: 4rem;
-        line-height: 4rem;
+        font-size: 4.5rem;
+        line-height: 5rem;
     }
 }
