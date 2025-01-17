@@ -89,9 +89,10 @@ function daysInMonth(monthInput, yearInput){
             isValidDay = true;
         }
     }
-    maximumAmountOfDays = daysInMonthObj[monthInput].days;
+    if (monthInput !== 0){
+        maximumAmountOfDays = daysInMonthObj[monthInput].days;
+    }
 }
-
 //error functions
 let isValidDay = true;
 dayInputElement.addEventListener('input', () => {    
@@ -181,7 +182,7 @@ function isValid(){
 }
 //Output functions
 arrowButton.addEventListener('click', () => {
-    //error alerts
+    console.log('button clicked');
 
     let listItems = document.querySelectorAll(".bottom li");
 
